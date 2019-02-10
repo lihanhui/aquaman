@@ -20,7 +20,7 @@ void event_executor::run(){
 	    	fprintf(stdout, "sleep over===============\n");
 	    	continue;
 	    }
-	    fprintf(stdout, "after===============");
+	    fprintf(stdout, "after===============\n");
 	    std::shared_ptr<runnable> & task = tasks.front();
 	    tasks.pop();
 		try{

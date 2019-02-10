@@ -17,8 +17,8 @@ public:
     		std::shared_ptr<channel_pipeline> pipeline,
     		std::shared_ptr<channel_handler>  handler): channel_handler_context(pipeline){
     	this->handler  = handler;
-    	this->set_next(nullptr);
-    	this->set_prev(nullptr);
+    	//this->set_next(nullptr);
+    	//this->set_prev(nullptr);
     }
 
     std::shared_ptr<channel_handler> get_channel_handler() override{

@@ -27,7 +27,7 @@ public:
 };
 int main (int argc, char *argv[]){
     std::function<void(const std::shared_ptr<future<int>> &future)> mylambda 
-    	= [](const std::shared_ptr<future<int>> &future)->void {fprintf(stdout, "xxxxxxxxx\n");};
+    	= [](const std::shared_ptr<future<int>> &future)->void {fprintf(stdout, "==============xxxxxxxxx\n");};
     
     fprintf(stdout, "function %lu\n", sizeof(std::shared_ptr<my_event>));
     const std::shared_ptr<my_event> event = std::make_shared<my_event>();

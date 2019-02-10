@@ -17,13 +17,13 @@ void event_wrapper::invoke(std::shared_ptr<channel_handler_context> context, std
 }  
         
 void channel_handler_context::invoke0(std::shared_ptr<event> & ev){
-	fprintf(stdout, "invoke0") ;
+	fprintf(stdout, "invoke0\n") ;
     std::shared_ptr<channel_handler_context> next = get_next();
     if(next == nullptr){
-        fprintf(stdout, "null next") ;
+        fprintf(stdout, "null next\n") ;
         return;
     }
-    fprintf(stdout, "executor") ;
+    fprintf(stdout, "executor\n") ;
     std::shared_ptr<event_executor> executor = next->get_event_executor();
     if (executor->in_eventloop()) {
         next->invoke(ev);
@@ -38,13 +38,19 @@ channel_handler_context::channel_handler_context(std::shared_ptr<channel_pipelin
     //this->next = nullptr;
 }
 std::shared_ptr<channel_handler_context> channel_handler_context::get_prev(){
+    if(this->prev.expired()){
+    	
+    	return nullptr;
+    }
 	return prev.lock();
 }
 std::shared_ptr<channel_handler_context> channel_handler_context::get_next(){
-	return next.lock();
+	return this->next;
 }
 void channel_handler_context::set_prev(std::shared_ptr<channel_handler_context> prev){
-	this->prev = prev;
+	if(prev != nullptr){
+		this->prev = prev;
+	}
 }
 void channel_handler_context::set_next(std::shared_ptr<channel_handler_context> next){
 	this->next = next;
@@ -61,7 +67,7 @@ std::shared_ptr<channel_pipeline> channel_handler_context::get_pipeline(){
 }
     
 void channel_handler_context::invoke(std::shared_ptr<event> ev) {
-    fprintf(stdout, "invoke") ;
+    fprintf(stdout, "invoke\n") ;
     std::shared_ptr<channel_handler> handler = get_channel_handler();
     if(handler != nullptr){
     	handler->invoke(this, ev);
