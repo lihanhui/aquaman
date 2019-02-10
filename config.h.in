@@ -1,0 +1,3 @@
+// the configured options and settings for aquaman
+#define aquaman_VERSION_MAJOR @aquaman_VERSION_MAJOR@
+#define aquaman_VERSION_MINOR @aquaman_VERSION_MINOR@
