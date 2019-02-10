@@ -19,7 +19,7 @@ public:
     	this->tail = tail;
     	this->head = head;
     }
-	void invoke(std::shared_ptr<event> & event) override{
+	void invoke(std::shared_ptr<event> event) override{
 		head->invoke(event);
 	}
 	std::shared_ptr<channel> get_channel() override {

@@ -1,5 +1,5 @@
 # aquaman
-c++ concurrent inpired by netty
+c++ concurrent lib inpired by netty
 
 # compile:
 ### cd path/to/aquaman

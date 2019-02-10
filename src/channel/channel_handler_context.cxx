@@ -1,7 +1,7 @@
 #include <aquaman/channel/channel_handler_context.h>
 
 
-event_wrapper::event_wrapper(std::shared_ptr<channel_handler_context> & context, std::shared_ptr<event> & ev ){
+event_wrapper::event_wrapper(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev ){
     this->ev = ev;
 	this->context = context;
 }
@@ -12,7 +12,7 @@ void event_wrapper::run() {
     	;
    }
 }
-void event_wrapper::invoke(std::shared_ptr<channel_handler_context> & context, std::shared_ptr<event> & ev) {
+void event_wrapper::invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev) {
     context->invoke(ev);
 }  
         
@@ -32,7 +32,7 @@ void channel_handler_context::invoke0(std::shared_ptr<event> & ev){
     }
 }	
     
-channel_handler_context::channel_handler_context(std::shared_ptr<channel_pipeline> & pipeline){
+channel_handler_context::channel_handler_context(std::shared_ptr<channel_pipeline> pipeline){
 	this->pipeline = pipeline;
     //this->prev = nullptr;
     //this->next = nullptr;
@@ -60,7 +60,7 @@ std::shared_ptr<channel_pipeline> channel_handler_context::get_pipeline(){
     return pipeline.lock();
 }
     
-void channel_handler_context::invoke(std::shared_ptr<event> & ev) {
+void channel_handler_context::invoke(std::shared_ptr<event> ev) {
     fprintf(stdout, "invoke") ;
     std::shared_ptr<channel_handler> handler = get_channel_handler();
     if(handler != nullptr){

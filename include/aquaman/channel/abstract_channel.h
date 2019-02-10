@@ -15,16 +15,16 @@ public:
     	this->pipeline = pipeline;
     	this->executor = executor;	
     }
-    void set_pipeline(std::shared_ptr<channel_pipeline> & pipeline) override{
+    void set_pipeline(std::shared_ptr<channel_pipeline> pipeline) override{
     	this->pipeline = pipeline;
     }
-    std::shared_ptr<channel_pipeline> & get_pipeline() override{
+    std::shared_ptr<channel_pipeline> get_pipeline() override{
         return pipeline;
     }
-    std::shared_ptr<event_executor> &   get_event_executor() override{
+    std::shared_ptr<event_executor>   get_event_executor() override{
         return executor;
     }
-    void invoke(std::shared_ptr<event> & ev) override {
+    void invoke(std::shared_ptr<event> ev) override {
          pipeline->invoke(ev);
     }
 };

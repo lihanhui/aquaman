@@ -31,7 +31,7 @@ int main (int argc, char *argv[]){
     
     fprintf(stdout, "function %lu\n", sizeof(std::shared_ptr<my_event>));
     const std::shared_ptr<my_event> event = std::make_shared<my_event>();
-    std::shared_ptr<future<int>> future = event->get_promise();
+    std::shared_ptr<future<int>> future = event->get_future();
     future->add_listener(std::make_shared<generic_future_listener<int>>(mylambda));
     
     fprintf(stdout, "scheduler\n");

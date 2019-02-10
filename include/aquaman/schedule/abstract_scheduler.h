@@ -48,7 +48,7 @@ public:
 			chans.push_back(chan);
 		}
 	}
-	std::shared_ptr<channel> & get_channel(int index){
+	std::shared_ptr<channel> get_channel(int index){
 		return chans[index];
 	}
 protected:

@@ -6,8 +6,8 @@
 #include <aquaman/concurrent/event_executor.h>
 
 struct channel : public channel_invoker{
-    virtual void set_pipeline(std::shared_ptr<channel_pipeline> & pipeline) = 0;
-    virtual std::shared_ptr<channel_pipeline> & get_pipeline() = 0;
-    virtual std::shared_ptr<event_executor> &   get_event_executor() = 0;
+    virtual void set_pipeline(std::shared_ptr<channel_pipeline> pipeline) = 0;
+    virtual std::shared_ptr<channel_pipeline> get_pipeline() = 0;
+    virtual std::shared_ptr<event_executor>  get_event_executor() = 0;
 };
 #endif

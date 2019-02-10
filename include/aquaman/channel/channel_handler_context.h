@@ -20,10 +20,10 @@ class event_wrapper: public runnable{
 	    std::shared_ptr<event> ev;
 	    std::shared_ptr<channel_handler_context> context;
 	public:
-	    event_wrapper(std::shared_ptr<channel_handler_context> & context, std::shared_ptr<event> & ev );
+	    event_wrapper(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev );
 	    void run() override ;
 	protected:
-	    void invoke(std::shared_ptr<channel_handler_context> & context, std::shared_ptr<event> & ev);
+	    void invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev);
 };
     
 struct channel_handler_context: public channel_invoker {
@@ -35,7 +35,7 @@ private:
 private: 
     void invoke0(std::shared_ptr<event> & ev);	
 public:
-    channel_handler_context(std::shared_ptr<channel_pipeline> & pipeline);
+    channel_handler_context(std::shared_ptr<channel_pipeline> pipeline);
     std::shared_ptr<channel_handler_context> get_prev();
     std::shared_ptr<channel_handler_context> get_next();
     
@@ -45,7 +45,7 @@ public:
     virtual std::shared_ptr<channel> get_channel();
     virtual std::shared_ptr<event_executor> get_event_executor() ;
     virtual std::shared_ptr<channel_pipeline> get_pipeline();
-    void invoke(std::shared_ptr<event> & ev) override;
+    void invoke(std::shared_ptr<event> ev) override;
     
     virtual std::shared_ptr<channel_handler> get_channel_handler() = 0;
 
@@ -54,14 +54,14 @@ public:
 
 class head_context: public channel_handler_context{
 public:
-    head_context(std::shared_ptr<channel_pipeline> & pipeline):channel_handler_context(pipeline){
+    head_context(std::shared_ptr<channel_pipeline> pipeline):channel_handler_context(pipeline){
     }     
     std::shared_ptr<channel_handler> get_channel_handler() override;   
 };
 
 class tail_context: public channel_handler_context{
 public:
-    tail_context(std::shared_ptr<channel_pipeline> & pipeline):channel_handler_context(pipeline){
+    tail_context(std::shared_ptr<channel_pipeline> pipeline):channel_handler_context(pipeline){
     } 
     std::shared_ptr<channel_handler> get_channel_handler() override;       
 };

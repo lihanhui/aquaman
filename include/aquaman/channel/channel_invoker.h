@@ -6,6 +6,6 @@
 #include <aquaman/event/event.h>
 
 struct channel_invoker {
-    virtual void invoke(std::shared_ptr<event> & ev) = 0;
+    virtual void invoke(std::shared_ptr<event> ev) = 0;
 };
 #endif
