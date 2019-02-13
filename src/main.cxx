@@ -24,13 +24,16 @@ public:
 	    fprintf(stdout, "my_event\n");
 	    get_promise()->success(1);
 	}
+	virtual ~my_event(){
+		fprintf(stdout, "my event destroied\n");
+	}
 };
 int main (int argc, char *argv[]){
     std::function<void(const std::shared_ptr<future<int>> &future)> mylambda 
     	= [](const std::shared_ptr<future<int>> &future)->void {fprintf(stdout, "==============xxxxxxxxx\n");};
     
     fprintf(stdout, "function %lu\n", sizeof(std::shared_ptr<my_event>));
-    const std::shared_ptr<my_event> event = std::make_shared<my_event>();
+    std::shared_ptr<my_event> event = std::make_shared<my_event>();
     std::shared_ptr<future<int>> future = event->get_future();
     future->add_listener(std::make_shared<generic_future_listener<int>>(mylambda));
     
@@ -38,6 +41,7 @@ int main (int argc, char *argv[]){
     std::shared_ptr<scheduler> sched = std::make_shared<default_scheduler>(1,2);
     fprintf(stdout, "submit_event\n");
     sched->submit_event(std::string("event"), event);
+    event = std::make_shared<my_event>();
     //std::shared_ptr<event_executor> executor = std::make_shared<event_executor>();
     //executor->insert_event_handler(event);
     //executor->start();

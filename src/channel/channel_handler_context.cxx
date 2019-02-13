@@ -67,6 +67,9 @@ std::shared_ptr<channel_pipeline> channel_handler_context::get_pipeline(){
 }
     
 void channel_handler_context::invoke(std::shared_ptr<event> ev) {
+    if( ev->aborted() ){
+        return ;
+    }
     fprintf(stdout, "invoke\n") ;
     std::shared_ptr<channel_handler> handler = get_channel_handler();
     if(handler != nullptr){

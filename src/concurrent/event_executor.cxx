@@ -21,10 +21,11 @@ void event_executor::run(){
 	    	continue;
 	    }
 	    fprintf(stdout, "after===============\n");
-	    std::shared_ptr<runnable> & task = tasks.front();
+	    std::shared_ptr<runnable> task = tasks.front();
 	    tasks.pop();
 		try{
 		    task->run();
+		    fprintf(stdout, "user count %d\n", task.use_count());
 		}catch(...){
 			;
 		}

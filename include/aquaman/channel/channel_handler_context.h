@@ -24,6 +24,10 @@ class event_wrapper: public runnable{
 	    void run() override ;
 	protected:
 	    void invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev);
+    public:
+	    virtual ~event_wrapper(){
+		    fprintf(stdout, "event_wrapper destroied\n");
+	    }
 };
     
 struct channel_handler_context: public channel_invoker {

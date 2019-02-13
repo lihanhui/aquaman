@@ -22,6 +22,10 @@ public:
     bool failure(std::exception_ptr cause) override{ 
         return promise_->failure(cause);
     }
+    
+    bool aborted() override {
+    	return promise_->done();
+    }
 protected:
     std::shared_ptr<promise<V>> get_promise() {
     	return promise_;

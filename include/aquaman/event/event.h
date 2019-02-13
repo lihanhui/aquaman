@@ -7,5 +7,6 @@ class event {
 public: 
     virtual void handle_event() = 0;
     virtual bool failure(std::exception_ptr cause) = 0;
+    virtual bool aborted() = 0;
 };
 #endif

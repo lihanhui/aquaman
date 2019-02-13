@@ -14,7 +14,7 @@
 template <typename T> class channel_promise: public channel_future<T>, public promise<T> {
 private:
     std::mutex locker;
-    std::atomic_bool done;
+    std::atomic_bool done_;
     std::atomic_bool succeeded;
     std::exception_ptr ex;
     
@@ -26,17 +26,17 @@ private:
     	
     }
     bool get_done(){
-    	return done.load();
+    	return done_.load();
     }
     void set_done(){
-    	return done.store(true);
+    	return done_.store(true);
     }
     std::list<std::shared_ptr<generic_future_listener<T>>> & get_listeners(){
     	return listeners;
     }    
 public:
     channel_promise(){
-    	done      = false;
+    	done_     = false;
     	succeeded = false;
     	ex        = nullptr;
     }
@@ -44,6 +44,7 @@ public:
     }
     
     ///////////////////////
+    
     bool success() override { return succeeded; }
     std::exception_ptr cause() override { return ex; }
     
@@ -60,12 +61,13 @@ public:
     }
     
     //////////////////////
+    bool done() override { return this->get_done(); }
     bool success(T v) override{
         std::lock_guard<std::mutex> guard(locker);
-        if(done) return false;
+        if(this->get_done()) return false;
          
         this->set_value(v);
-        this->done = true;
+        this->done_ = true;
         this->succeeded = true;
     	for(std::shared_ptr<generic_future_listener<T>> &listener: listeners){
     		listener->operationComplete(this->shared_from_this());
@@ -74,10 +76,10 @@ public:
     }
     bool try_success(T v) override{
     	std::lock_guard<std::mutex> guard(locker);
-    	if(done) return false;
+    	if(this->get_done()) return false;
     	
     	this->set_value(v);
-    	this->done = true;
+    	this->done_ = true;
     	this->succeeded = true;
     	
     	for(std::shared_ptr<generic_future_listener<T>> &listener: listeners){
@@ -88,9 +90,9 @@ public:
     
     bool failure(std::exception_ptr cause) override{
     	std::lock_guard<std::mutex> guard(locker);
-    	if(done) return false;
+    	if(this->get_done()) return false;
     	
-    	this->done = true;
+    	this->done_ = true;
     	this->succeeded = false;
     	this->set_exception(cause);
     	this->ex = cause;
@@ -103,9 +105,9 @@ public:
     
     bool try_failure(std::exception_ptr cause) override{
     	std::lock_guard<std::mutex> guard(locker);
-    	if(done) return false;
+    	if(this->get_done()) return false;
     	
-    	this->done = true;
+    	this->done_ = true;
     	this->succeeded = false;
     	this->set_exception(cause);
     	this->ex = cause;

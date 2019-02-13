@@ -41,6 +41,6 @@ public:
      */
     virtual bool try_failure(std::exception_ptr cause) = 0;
 
-
+    virtual bool done() = 0;
 };
 #endif
