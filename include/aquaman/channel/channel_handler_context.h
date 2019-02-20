@@ -3,6 +3,8 @@
 
 #include <memory>
 
+#include <xlog/xlog.h>
+
 #include <aquaman/channel/channel.h>
 #include <aquaman/channel/channel_invoker.h>
 #include <aquaman/channel/channel_pipeline.h>
@@ -16,6 +18,8 @@ struct channel;
 struct channel_handler_context;
 
 class event_wrapper: public runnable{
+private:
+    static xlog::logger logger;
 	private:
 	    std::shared_ptr<event> ev;
 	    std::shared_ptr<channel_handler_context> context;
@@ -26,11 +30,13 @@ class event_wrapper: public runnable{
 	    void invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev);
     public:
 	    virtual ~event_wrapper(){
-		    fprintf(stdout, "event_wrapper destroied\n");
+		    LOG(logger, xlog::log_level::DEBUG, "event_wrapper destroied");
 	    }
 };
     
 struct channel_handler_context: public channel_invoker {
+private:
+    static xlog::logger logger;
 private:
     std::weak_ptr<channel_pipeline> pipeline;
     std::weak_ptr<channel_handler_context> prev;

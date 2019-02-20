@@ -1,12 +1,16 @@
 #ifndef AQUAMAN_CHANNEL_DEFAULT_CHANNEL_PIPELINE
 #define AQUAMAN_CHANNEL_DEFAULT_CHANNEL_PIPELINE
 
+#include <xlog/xlog.h>
+
 #include <aquaman/channel/channel_handler_context.h>
 #include <aquaman/channel/channel_pipeline.h>
 #include <aquaman/channel/default_channel_handler_context.h>
 #include <aquaman/event/event.h>
 
 class default_channel_pipeline : public channel_pipeline{
+private:
+    static xlog::logger logger;
 private:
     std::weak_ptr<channel> chan;
     std::shared_ptr<channel_handler_context> tail;

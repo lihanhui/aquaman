@@ -20,33 +20,37 @@ struct myclass {
   void operator()() {;}
 };
 class my_event: public generic_event<int>{
+private:
+    static xlog::logger logger;
 public:
     my_event():generic_event(){
     }
-	void handle_event() override{
-	    fprintf(stdout, "my_event\n");
-	    get_promise()->success(1);
-	}
-	virtual ~my_event(){
-		fprintf(stdout, "my event destroied\n");
-	}
+    void handle_event() override{
+        LOG(logger, xlog::log_level::DEBUG, "{}", "my_event");
+        get_promise()->success(1);
+    }
+    virtual ~my_event(){
+        LOG(logger, xlog::log_level::DEBUG, "{}", "my event destroied");
+    }
 };
+xlog::logger my_event::logger = xlog::logger("my_event");
+
 int main (int argc, char *argv[]){
     xlog::logger logger = xlog::logger("main");
     LOG(logger, xlog::log_level::DEBUG, "{}", "this is main func of xlog test");
     
     std::function<void(const std::shared_ptr<future<int>> &future)> mylambda 
-    	= [](const std::shared_ptr<future<int>> &future)->void {fprintf(stdout, "==============xxxxxxxxx\n");};
+        = [&](const std::shared_ptr<future<int>> &future)->void { LOG(logger, xlog::log_level::DEBUG, "{}", "==============xxxxxxxxx"); };
     
-    fprintf(stdout, "function %lu\n", sizeof(std::shared_ptr<my_event>));
+    LOG(logger, xlog::log_level::DEBUG, "function {}", sizeof(std::shared_ptr<my_event>));
     std::shared_ptr<my_event> event = std::make_shared<my_event>();
-    std::cout<<typeid(event).name()<<std::endl;
+    LOG(logger, xlog::log_level::DEBUG, "typeid(event).name() = {}", typeid(event).name());
     std::shared_ptr<future<int>> future = event->get_future();
     future->add_listener(std::make_shared<generic_future_listener<int>>(mylambda));
     
-    fprintf(stdout, "scheduler\n");
+    LOG(logger, xlog::log_level::DEBUG, "{}", "scheduler");
     std::shared_ptr<scheduler> sched = std::make_shared<default_scheduler>(1,2);
-    fprintf(stdout, "submit_event\n");
+    LOG(logger, xlog::log_level::DEBUG, "{}", "submit_event");
     sched->submit_event(std::string("event"), event);
     event = std::make_shared<my_event>();
     //std::shared_ptr<event_executor> executor = std::make_shared<event_executor>();
@@ -58,16 +62,16 @@ int main (int argc, char *argv[]){
 	}
     if (argc < 2)
     {
-        fprintf(stdout,"%s Version %d.%d\n",
+        LOG(logger, xlog::log_level::DEBUG, "{} Version {}.{}",
             argv[0],
             aquaman_VERSION_MAJOR,
             aquaman_VERSION_MINOR);
-        fprintf(stdout,"Usage: %s number\n",argv[0]);
+        LOG(logger, xlog::log_level::DEBUG, "Usage: {} number",argv[0]);
         return 1;
     }
     double inputValue = atof(argv[1]);
     double outputValue = sqrt(inputValue);
-    fprintf(stdout,"The square root of %g is %g\n",
+    LOG(logger, xlog::log_level::DEBUG, "The square root of {} is {}",
           inputValue, outputValue);
     return 0;
 }

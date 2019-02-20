@@ -1,5 +1,8 @@
+#include <xlog/xlog.h>
+
 #include <aquaman/channel/channel_handler_context.h>
 
+xlog::logger event_wrapper::logger = xlog::logger("event_wrapper");
 
 event_wrapper::event_wrapper(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev ){
     this->ev = ev;
@@ -15,15 +18,16 @@ void event_wrapper::run() {
 void event_wrapper::invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev) {
     context->invoke(ev);
 }  
-        
+
+xlog::logger channel_handler_context::logger = xlog::logger("channel_handler_context");      
 void channel_handler_context::invoke0(std::shared_ptr<event> & ev){
-	fprintf(stdout, "invoke0\n") ;
+    LOG(logger, xlog::log_level::DEBUG, "invoke0") ;
     std::shared_ptr<channel_handler_context> next = get_next();
     if(next == nullptr){
-        fprintf(stdout, "null next\n") ;
+        LOG(logger, xlog::log_level::DEBUG, "null next") ;
         return;
     }
-    fprintf(stdout, "executor\n") ;
+    LOG(logger, xlog::log_level::DEBUG, "executor") ;
     std::shared_ptr<event_executor> executor = next->get_event_executor();
     if (executor->in_eventloop()) {
         next->invoke(ev);
@@ -69,7 +73,7 @@ void channel_handler_context::invoke(std::shared_ptr<event> ev) {
     if( ev->aborted() ){
         return ;
     }
-    fprintf(stdout, "invoke\n") ;
+    LOG(logger, xlog::log_level::DEBUG, "invoke") ;
     std::shared_ptr<channel_handler> handler = get_channel_handler();
     if(handler != nullptr){
     	handler->invoke(this, ev);
