@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 3.0)
-set (CXX_STANDARD "c++14")
+set (CXX_STANDARD "c++17")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=${CXX_STANDARD}")
 
 project (aquaman)
@@ -12,6 +12,11 @@ configure_file (
   "${PROJECT_BINARY_DIR}/config.h"
 )
 
+find_package(xlog 0.9 REQUIRED)
+if(xlog_FOUND)
+    message("found - ${xlog_INCLUDE_DIRS} - ${xlog_LIBRARIES}")
+endif()
+include_directories("${xlog_INCLUDE_DIRS}")
 include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${PROJECT_SOURCE_DIR}/include/")
 
@@ -19,7 +24,10 @@ add_subdirectory(src/event)
 add_subdirectory(src/channel)
 add_subdirectory(src/concurrent)
 add_subdirectory(src/schedule)
-set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule)
+
+find_library(XLOG_LIBRARY xlog HINTS /usr/local/lib)
+#set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule ${XLOG_LIBRARY})
+set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule ${xlog_LIBRARIES})
 
 add_executable(aquaman-test src/main.cxx)
 target_link_libraries(aquaman-test  ${EXTRA_LIBS})

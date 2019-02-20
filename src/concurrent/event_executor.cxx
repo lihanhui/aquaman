@@ -7,25 +7,27 @@
 #include <queue>
 #include <thread>
 
+#include <xlog/xlog.h>
+
 #include <aquaman/concurrent/event_executor.h>
 #include <aquaman/event/event.h>
 
+xlog::logger event_executor::logger = xlog::logger("event_executor");
+
 void event_executor::run(){
 	while(true){
-	    fprintf(stdout, "before===============\n");
+	    LOG(event_executor::logger, xlog::log_level::DEBUG, "{}", "try to dequeue event");
 	    std::lock_guard<std::mutex> guard(locker);
 	    if(tasks.empty()){
-	        fprintf(stdout, "===============\n");
 	    	std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	    	fprintf(stdout, "sleep over===============\n");
 	    	continue;
 	    }
-	    fprintf(stdout, "after===============\n");
+	    LOG(event_executor::logger, xlog::log_level::DEBUG, "{}", "try to process one event");
 	    std::shared_ptr<runnable> task = tasks.front();
 	    tasks.pop();
 		try{
 		    task->run();
-		    fprintf(stdout, "user count %d\n", task.use_count());
+		    LOG(event_executor::logger, xlog::log_level::DEBUG, "user count {}", task.use_count());
 		}catch(...){
 			;
 		}

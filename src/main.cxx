@@ -4,6 +4,7 @@
 #include <math.h>
 #include <chrono>
 #include <functional>
+#include <iostream>
 #include <thread>
 #include "config.h"
 
@@ -13,7 +14,9 @@
 #include <aquaman/event/generic_event.h>
 #include <aquaman/schedule/default_scheduler.h>
  
- struct myclass {
+#include <xlog/xlog.h>
+
+struct myclass {
   void operator()() {;}
 };
 class my_event: public generic_event<int>{
@@ -29,11 +32,15 @@ public:
 	}
 };
 int main (int argc, char *argv[]){
+    xlog::logger logger = xlog::logger("main");
+    LOG(logger, xlog::log_level::DEBUG, "{}", "this is main func of xlog test");
+    
     std::function<void(const std::shared_ptr<future<int>> &future)> mylambda 
     	= [](const std::shared_ptr<future<int>> &future)->void {fprintf(stdout, "==============xxxxxxxxx\n");};
     
     fprintf(stdout, "function %lu\n", sizeof(std::shared_ptr<my_event>));
     std::shared_ptr<my_event> event = std::make_shared<my_event>();
+    std::cout<<typeid(event).name()<<std::endl;
     std::shared_ptr<future<int>> future = event->get_future();
     future->add_listener(std::make_shared<generic_future_listener<int>>(mylambda));
     

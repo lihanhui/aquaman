@@ -3,10 +3,10 @@
 
 event_wrapper::event_wrapper(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev ){
     this->ev = ev;
-	this->context = context;
+    this->context = context;
 }
 void event_wrapper::run() {
-	try {
+    try {
         invoke(this->context, this->ev);
     } catch(...){
     	;
@@ -38,8 +38,7 @@ channel_handler_context::channel_handler_context(std::shared_ptr<channel_pipelin
     //this->next = nullptr;
 }
 std::shared_ptr<channel_handler_context> channel_handler_context::get_prev(){
-    if(this->prev.expired()){
-    	
+    if(this->prev.expired()){	
     	return nullptr;
     }
 	return prev.lock();

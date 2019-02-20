@@ -6,15 +6,19 @@
 #include <queue>
 #include <thread>
 
+#include <xlog/xlog.h>
+
 #include <aquaman/concurrent/runnable.h>
 
 class event_executor {
+private:
+    static xlog::logger logger;
 private:
     std::mutex locker; 
     std::queue<std::shared_ptr<runnable>> tasks;
     std::thread::id this_id;
     std::thread thrd;
-    //auto ret;
+    
 public:
     
     void insert_task(std::shared_ptr<runnable> task) {

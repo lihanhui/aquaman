@@ -33,8 +33,8 @@ class event_wrapper: public runnable{
 struct channel_handler_context: public channel_invoker {
 private:
     std::weak_ptr<channel_pipeline> pipeline;
-	std::weak_ptr<channel_handler_context> prev;
-	std::shared_ptr<channel_handler_context> next;
+    std::weak_ptr<channel_handler_context> prev;
+    std::shared_ptr<channel_handler_context> next;
 
 private: 
     void invoke0(std::shared_ptr<event> & ev);	
