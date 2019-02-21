@@ -12,6 +12,9 @@ configure_file (
   "${PROJECT_BINARY_DIR}/config.h"
 )
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(uv REQUIRED libuv)
+message ("${uv_INCLUDE_DIRS} ${uv_LIBRARIES} ${uv_LINK_LIBRARIES}")
 find_package(xlog 0.9 REQUIRED)
 if(xlog_FOUND)
     message("found - ${xlog_INCLUDE_DIRS} - ${xlog_LIBRARIES}")
@@ -30,7 +33,8 @@ find_library(XLOG_LIBRARY xlog HINTS /usr/local/lib)
 set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule ${xlog_LIBRARIES})
 
 add_executable(aquaman-test src/main.cxx)
-target_link_libraries(aquaman-test  ${EXTRA_LIBS})
+target_compile_options(aquaman-test PUBLIC ${uv_CFLAGS_OTHER})
+target_link_libraries(aquaman-test  ${EXTRA_LIBS} ${uv_LINK_LIBRARIES})
 
 add_library(aquaman SHARED src/main.cxx)
 target_link_libraries(aquaman  ${EXTRA_LIBS})

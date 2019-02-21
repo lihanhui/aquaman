@@ -16,12 +16,12 @@ public:
     default_scheduler(int thread_count, int max_channel_count): abstract_scheduler(thread_count, max_channel_count) {
 	}
     void submit_event(const std::string & key, std::shared_ptr<event>  ev) override{
-         LOG(logger, xlog::log_level::DEBUG, "submit_event");
+         XLOG(logger, xlog::log_level::DEBUG, "submit_event");
          int hash = util::hash(key);
-         LOG(logger, xlog::log_level::DEBUG, "hash");
+         XLOG(logger, xlog::log_level::DEBUG, "hash");
          int index = hash%this->get_thread_count();
          std::shared_ptr<channel> chan = this->get_channel(index);
-         LOG(logger, xlog::log_level::DEBUG, "channel");
+         XLOG(logger, xlog::log_level::DEBUG, "channel");
          chan->invoke(ev);
     }
 };

@@ -30,7 +30,7 @@ private:
 	    void invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev);
     public:
 	    virtual ~event_wrapper(){
-		    LOG(logger, xlog::log_level::DEBUG, "event_wrapper destroied");
+		    XLOG(logger, xlog::log_level::DEBUG, "event_wrapper destroied");
 	    }
 };
     
