@@ -76,7 +76,7 @@ void channel_handler_context::invoke(std::shared_ptr<event> ev) {
     XLOG(logger, xlog::log_level::DEBUG, "invoke") ;
     std::shared_ptr<channel_handler> handler = get_channel_handler();
     if(handler != nullptr){
-    	handler->invoke(this, ev);
+    	handler->invoke(this->shared_from_this(), ev);
     }else{
 		invoke0(ev);
 	}

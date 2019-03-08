@@ -8,6 +8,6 @@
 
 struct channel_handler_context;
 struct channel_handler {
-    virtual void invoke(channel_handler_context * context, std::shared_ptr<event> ev) = 0;
+    virtual void invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev) = 0;
 };
 #endif

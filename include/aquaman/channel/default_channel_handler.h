@@ -9,7 +9,7 @@
 class default_channel_handler : public channel_handler{
 public:
     default_channel_handler(){}
-    void invoke(channel_handler_context * context, std::shared_ptr<event> ev) override {
+    void invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev) override {
 		ev->handle_event();
     }
 };

@@ -34,7 +34,7 @@ private:
 	    }
 };
     
-struct channel_handler_context: public channel_invoker {
+struct channel_handler_context: public channel_invoker, public std::enable_shared_from_this<channel_handler_context> {
 private:
     static xlog::logger logger;
 private:
