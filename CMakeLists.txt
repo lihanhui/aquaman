@@ -11,17 +11,18 @@ configure_file (
   "${PROJECT_SOURCE_DIR}/config.h.in"
   "${PROJECT_BINARY_DIR}/config.h"
 )
+include_directories("${PROJECT_BINARY_DIR}")
+include_directories("${PROJECT_SOURCE_DIR}/include/")
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(uv REQUIRED libuv)
 message ("${uv_INCLUDE_DIRS} ${uv_LIBRARIES} ${uv_LINK_LIBRARIES}")
+
 find_package(xlog 0.9 REQUIRED)
 if(xlog_FOUND)
     message("found - ${xlog_INCLUDE_DIRS} - ${xlog_LIBRARIES}")
 endif()
 include_directories("${xlog_INCLUDE_DIRS}")
-include_directories("${PROJECT_BINARY_DIR}")
-include_directories("${PROJECT_SOURCE_DIR}/include/")
 
 add_subdirectory(src/event)
 add_subdirectory(src/channel)
