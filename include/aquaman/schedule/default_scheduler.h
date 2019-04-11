@@ -6,7 +6,10 @@
 #include <aquaman/event/event.h>
 #include <aquaman/schedule/abstract_scheduler.h>
 #include <aquaman/util/util.h>
-
+namespace aquman
+{
+namespace schedule
+{
 struct default_scheduler: public abstract_scheduler {
 private:
     static xlog::logger logger;
@@ -25,5 +28,6 @@ public:
          chan->invoke(ev);
     }
 };
-
+}; // namespace schedule
+}; // namespace aquman
 #endif 

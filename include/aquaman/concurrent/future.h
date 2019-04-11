@@ -4,7 +4,10 @@
 #include <exception>
 
 #include <aquaman/concurrent/generic_future_listener.h>
-
+namespace aquman
+{
+namespace concurrent
+{
 template<class T> class future: public std::enable_shared_from_this<future<T>> {
  public:
  /**
@@ -40,4 +43,6 @@ template<class T> class future: public std::enable_shared_from_this<future<T>> {
     virtual T get() = 0;
 
 };
+}; // namespace concurrent
+}; // namespace aquman
 #endif

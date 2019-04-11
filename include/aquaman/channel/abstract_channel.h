@@ -6,6 +6,10 @@
 #include <aquaman/concurrent/event_executor.h>
 #include <aquaman/event/event.h>
 
+namespace aquman
+{
+namespace channel
+{
 class abstract_channel : public channel{
 private:
     std::shared_ptr<channel_pipeline> pipeline;
@@ -28,4 +32,6 @@ public:
          pipeline->invoke(ev);
     }
 };
+}; // namespace channel
+}; // namespace aquman
 #endif

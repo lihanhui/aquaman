@@ -7,7 +7,10 @@
 #include <aquaman/event/result.h>
 #include <aquaman/event/event.h>
 #include <aquaman/event/event_handler.h>
-
+namespace aquman
+{
+namespace event
+{
 template <typename V> class generic_event: public event_handler<V>, public event {
 private:
     std::shared_ptr<channel_promise<V>> promise_;
@@ -31,4 +34,6 @@ protected:
     	return promise_;
     }
 };
+}; // namespace event
+}; // namespace aquman
 #endif

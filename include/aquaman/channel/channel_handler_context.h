@@ -12,6 +12,10 @@
 #include <aquaman/concurrent/event_executor.h>
 #include <aquaman/event/event.h>
 
+namespace aquman
+{
+namespace channel
+{
 struct channel_pipeline;
 struct channel_handler;         
 struct channel;
@@ -75,5 +79,6 @@ public:
     } 
     std::shared_ptr<channel_handler> get_channel_handler() override;       
 };
-
+}; // namespace channel
+}; // namespace aquman
 #endif

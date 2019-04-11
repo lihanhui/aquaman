@@ -11,7 +11,10 @@
 #include <aquaman/concurrent/event_executor.h>
 #include <aquaman/event/event.h>
 #include <aquaman/schedule/scheduler.h>
-
+namespace aquman
+{
+namespace schedule
+{
 struct abstract_scheduler: public scheduler {
 private:
     int thread_count;
@@ -56,5 +59,6 @@ protected:
 	    return this->thread_count;
 	}
 };
-
+}; // namespace schedule
+}; // namespace aquman
 #endif 

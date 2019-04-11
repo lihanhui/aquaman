@@ -6,6 +6,10 @@
 #include <aquaman/concurrent/event_listener.h>
 #include <aquaman/concurrent/future.h>
 
+namespace aquman
+{
+namespace concurrent
+{
 template<class T> class future;
 
 template <typename T, typename F = future<T>> class generic_future_listener: public event_listener{
@@ -19,6 +23,7 @@ public:
     	callable(future);
     }
 };
-
+}; // namespace concurrent
+}; // namespace aquman
 //typedef generic_future_listener<typename T> future_listener<typename T>;
 #endif

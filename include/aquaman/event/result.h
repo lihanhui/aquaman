@@ -2,7 +2,10 @@
 #define AQUAMAN_EVENT_RESULT
 
 #include <string>
-
+namespace aquman
+{
+namespace event
+{
 template <typename V> class result {
 private:
     int code;
@@ -41,4 +44,6 @@ public:
     	return value;
     }
 };
+}; // namespace event
+}; // namespace aquman
 #endif
