@@ -8,10 +8,9 @@
 #include <aquaman/channel/default_channel_handler_context.h>
 #include <aquaman/event/event.h>
 
-namespace aquman
+namespace aquaman
 {
-namespace channel
-{
+
 class default_channel_pipeline : public channel_pipeline{
 private:
     static xlog::logger logger;
@@ -38,6 +37,6 @@ public:
     void add_first(std::string name, std::shared_ptr<channel_handler_context> ctx) override;
     void add_last (std::string name, std::shared_ptr<channel_handler_context> ctx) override;
 };
-}; // namespace channel
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif

@@ -16,6 +16,7 @@
  
 #include <xlog/xlog.h>
 
+using namespace aquaman;
 struct myclass {
   void operator()() {;}
 };

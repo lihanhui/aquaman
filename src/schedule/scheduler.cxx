@@ -2,4 +2,4 @@
 
 #include <aquaman/schedule/default_scheduler.h>
 
-xlog::logger default_scheduler::logger = xlog::logger("default_scheduler");
+xlog::logger aquaman::default_scheduler::logger = xlog::logger("default_scheduler");

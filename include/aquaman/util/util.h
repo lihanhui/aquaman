@@ -3,16 +3,15 @@
 
 #include <functional>
 #include <string>
-namespace aquman
+namespace aquaman
 {
-namespace util
-{
+
 struct util {
 	static size_t hash(const std::string & key) {
 		std::hash<std::string> hash_fn;
     	return hash_fn(key);
 	}
 };
-}; // namespace util
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif

@@ -5,6 +5,8 @@
 #include <aquaman/channel/channel_pipeline.h>
 #include <aquaman/channel/default_channel_handler_context.h>
 
+using namespace aquaman;
+
 xlog::logger default_channel_pipeline::logger = xlog::logger("default_channel_pipeline");
 
 void default_channel_pipeline::add_first(std::string name, std::shared_ptr<channel_handler_context> ctx) {

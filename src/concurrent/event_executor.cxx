@@ -12,6 +12,8 @@
 #include <aquaman/concurrent/event_executor.h>
 #include <aquaman/event/event.h>
 
+using namespace aquaman;
+
 xlog::logger event_executor::logger = xlog::logger("event_executor");
 
 void event_executor::run(){

@@ -2,10 +2,9 @@
 #define AQUAMAN_CONCURRENT_PROMISE
 
 #include <future>
-namespace aquman
+namespace aquaman
 {
-namespace concurrent
-{
+
 template <typename T> class promise: public std::promise<T>{
 public:
      /**
@@ -46,6 +45,6 @@ public:
 
     virtual bool done() = 0;
 };
-}; // namespace concurrent
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif

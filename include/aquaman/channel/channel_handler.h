@@ -6,14 +6,13 @@
 #include <aquaman/channel/channel_handler_context.h>
 #include <aquaman/event/event.h>
 
-namespace aquman
+namespace aquaman
 {
-namespace channel
-{
+
 struct channel_handler_context;
 struct channel_handler {
     virtual void invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev) = 0;
 };
-}; // namespace channel
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif

@@ -8,10 +8,9 @@
 #include <aquaman/channel/channel.h>
 #include <aquaman/channel/channel_invoker.h>
 
-namespace aquman
+namespace aquaman
 {
-namespace channel
-{
+
 struct channel;
 struct channel_pipeline : public channel_invoker{
     virtual std::shared_ptr<channel> get_channel() = 0;
@@ -19,6 +18,6 @@ struct channel_pipeline : public channel_invoker{
     virtual void add_first(std::string name, std::shared_ptr<channel_handler_context> ctx) = 0;
     virtual void add_last (std::string name, std::shared_ptr<channel_handler_context> ctx) = 0;
 };
-}; // namespace channel
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif

@@ -5,13 +5,12 @@
 
 #include <aquaman/event/event.h>
 
-namespace aquman
+namespace aquaman
 {
-namespace channel
-{
+
 struct channel_invoker {
     virtual void invoke(std::shared_ptr<event> ev) = 0;
 };
-}; // namespace channel
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif

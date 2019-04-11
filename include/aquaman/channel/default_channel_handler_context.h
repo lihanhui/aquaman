@@ -8,10 +8,9 @@
 #include <aquaman/concurrent/runnable.h>
 #include <aquaman/event/event.h>
 
-namespace aquman
+namespace aquaman
 {
-namespace channel
-{
+
 class default_channel_handler_context : public channel_handler_context{
 private:
     std::shared_ptr<channel_handler> handler;
@@ -29,6 +28,6 @@ public:
     	return handler;
     }
 };
-}; // namespace channel
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif

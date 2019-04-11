@@ -2,6 +2,7 @@
 
 #include <aquaman/channel/channel_handler_context.h>
 
+using namespace aquaman;
 xlog::logger event_wrapper::logger = xlog::logger("event_wrapper");
 
 event_wrapper::event_wrapper(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev ){

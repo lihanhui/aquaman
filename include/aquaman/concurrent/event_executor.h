@@ -9,10 +9,9 @@
 #include <xlog/xlog.h>
 
 #include <aquaman/concurrent/runnable.h>
-namespace aquman
+namespace aquaman
 {
-namespace concurrent
-{
+
 class event_executor {
 private:
     static xlog::logger logger;
@@ -48,6 +47,6 @@ protected:
     }
    
 };
-}; // namespace concurrent
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif 

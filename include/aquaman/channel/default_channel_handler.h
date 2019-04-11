@@ -6,10 +6,9 @@
 #include <aquaman/concurrent/event_executor.h>
 #include <aquaman/event/event.h>
 
-namespace aquman
+namespace aquaman
 {
-namespace channel
-{
+
 class default_channel_handler : public channel_handler{
 public:
     default_channel_handler(){}
@@ -17,6 +16,6 @@ public:
 		ev->handle_event();
     }
 };
-}; // namespace channel
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif

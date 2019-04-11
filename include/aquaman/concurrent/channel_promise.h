@@ -10,10 +10,9 @@
 #include <aquaman/concurrent/generic_future_listener.h>
 #include <aquaman/concurrent/promise.h>
 #include <aquaman/event/result.h>
-namespace aquman
+namespace aquaman
 {
-namespace concurrent
-{
+
 template <typename T> class channel_promise: public channel_future<T>, public promise<T> {
 private:
     std::mutex locker;
@@ -122,6 +121,6 @@ public:
     }
     
 };
-}; // namespace concurrent
-}; // namespace aquman
+
+}; // namespace aquaman
 #endif
