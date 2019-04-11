@@ -1,0 +1,9 @@
+get_filename_component (_dir "${CMAKE_CURRENT_LIST_FILE}" PATH)
+get_filename_component (_prefix "${_dir}/../../.." ABSOLUTE)
+include ("${_dir}/aquaman-targets.cmake")
+set (aquaman_INCLUDE_DIRS "${_prefix}/include")
+message("aquaman include dir: ${aquaman_INCLUDE_DIRS}")
+
+find_library(aquaman_LIBRARIES aquaman HINTS "${_prefix}/lib")
+set_target_properties(aquaman PROPERTIES IMPORTED_LOCATION "${aquaman_LIBRARIES}")
+message("aquaman lib dir: ${aquaman_LIBRARY_PATH}")

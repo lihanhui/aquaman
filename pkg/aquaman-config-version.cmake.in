@@ -1,0 +1,7 @@
+set (PACKAGE_VERSION "@aquaman_VERSION@")
+if (NOT "${PACKAGE_FIND_VERSION}" VERSION_GREATER "@aquaman_VERSION@")
+    set (PACKAGE_VERSION_COMPATIBLE 1)      # compatible with older
+    if ("${PACKAGE_FIND_VERSION}" VERSION_EQUAL "@aquaman_VERSION@")
+        set (PACKAGE_VERSION_EXACT 1)       # excat match for this version
+    endif ()
+endif ()

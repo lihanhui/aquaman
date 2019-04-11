@@ -40,6 +40,21 @@ add_library(aquaman SHARED src/main.cxx)
 target_link_libraries(aquaman  ${EXTRA_LIBS})
 
 # add the install targets
-install (TARGETS aquaman DESTINATION lib)
+install (TARGETS aquaman DESTINATION lib
+         EXPORT aquaman-targets)
 install (DIRECTORY "${PROJECT_SOURCE_DIR}/include/aquaman"        
          DESTINATION include)
+install (EXPORT aquaman-targets
+         DESTINATION lib/cmake/aquaman)
+
+#export (TARGETS aquaman wrapper FILE aquaman-targets.cmake)
+configure_file ( "${PROJECT_SOURCE_DIR}/pkg/aquaman-config.cmake.in"
+                 "${PROJECT_BINARY_DIR}/aquaman-config.cmake" @ONLY)
+                 
+configure_file ( "${PROJECT_SOURCE_DIR}/pkg/aquaman-config-version.cmake.in"
+                 "${PROJECT_BINARY_DIR}/aquaman-config-version.cmake" @ONLY)
+                 
+install (FILES 
+        "${PROJECT_BINARY_DIR}/aquaman-config.cmake"
+        "${PROJECT_BINARY_DIR}/aquaman-config-version.cmake"
+        DESTINATION lib/cmake/aquaman)
