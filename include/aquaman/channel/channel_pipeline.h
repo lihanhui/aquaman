@@ -3,10 +3,10 @@
 
 #include <memory>
 
-#include <aquaman/channel/channel_handler.h>
-#include <aquaman/channel/channel_handler_context.h>
-#include <aquaman/channel/channel.h>
-#include <aquaman/channel/channel_invoker.h>
+#include "aquaman/channel/channel_handler.h"
+#include "aquaman/channel/channel_handler_context.h"
+#include "aquaman/channel/channel.h"
+#include "aquaman/channel/channel_invoker.h"
 
 namespace aquaman
 {

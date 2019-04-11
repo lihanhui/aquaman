@@ -1,10 +1,10 @@
 #ifndef AQUAMAN_CHANNEL_ABSTRACT_CHANNEL
 #define AQUAMAN_CHANNEL_ABSTRACT_CHANNEL
 
-#include <aquaman/channel/channel.h>
-#include <aquaman/channel/channel_pipeline.h>
-#include <aquaman/concurrent/event_executor.h>
-#include <aquaman/event/event.h>
+#include "aquaman/channel/channel.h"
+#include "aquaman/channel/channel_pipeline.h"
+#include "aquaman/concurrent/event_executor.h"
+#include "aquaman/event/event.h"
 
 namespace aquaman
 {

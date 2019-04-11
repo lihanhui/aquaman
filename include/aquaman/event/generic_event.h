@@ -1,12 +1,12 @@
 #ifndef AQUAMAN_EVENT_GENERIC_EVENT
 #define AQUAMAN_EVENT_GENERIC_EVENT
 
-#include <aquaman/concurrent/channel_promise.h>
-#include <aquaman/concurrent/promise.h>
-#include <aquaman/concurrent/future.h>
-#include <aquaman/event/result.h>
-#include <aquaman/event/event.h>
-#include <aquaman/event/event_handler.h>
+#include "aquaman/concurrent/channel_promise.h"
+#include "aquaman/concurrent/promise.h"
+#include "aquaman/concurrent/future.h"
+#include "aquaman/event/result.h"
+#include "aquaman/event/event.h"
+#include "aquaman/event/event_handler.h"
 namespace aquaman
 {
 

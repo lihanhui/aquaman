@@ -5,12 +5,12 @@
 
 #include <xlog/xlog.h>
 
-#include <aquaman/channel/channel.h>
-#include <aquaman/channel/channel_invoker.h>
-#include <aquaman/channel/channel_pipeline.h>
-#include <aquaman/channel/channel_handler.h>
-#include <aquaman/concurrent/event_executor.h>
-#include <aquaman/event/event.h>
+#include "aquaman/channel/channel.h"
+#include "aquaman/channel/channel_invoker.h"
+#include "aquaman/channel/channel_pipeline.h"
+#include "aquaman/channel/channel_handler.h"
+#include "aquaman/concurrent/event_executor.h"
+#include "aquaman/event/event.h"
 
 namespace aquaman
 {

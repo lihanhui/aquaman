@@ -1,9 +1,9 @@
 #ifndef AQUAMAN_CHANNEL_CHANNEL
 #define AQUAMAN_CHANNEL_CHANNEL
 
-#include <aquaman/channel/channel_invoker.h>
-#include <aquaman/channel/channel_pipeline.h>
-#include <aquaman/concurrent/event_executor.h>
+#include "aquaman/channel/channel_invoker.h"
+#include "aquaman/channel/channel_pipeline.h"
+#include "aquaman/concurrent/event_executor.h"
 
 namespace aquaman
 {

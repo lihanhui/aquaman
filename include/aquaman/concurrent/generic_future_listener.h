@@ -3,8 +3,8 @@
 
 #include <functional>
 
-#include <aquaman/concurrent/event_listener.h>
-#include <aquaman/concurrent/future.h>
+#include "aquaman/concurrent/event_listener.h"
+#include "aquaman/concurrent/future.h"
 
 namespace aquaman
 {

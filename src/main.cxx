@@ -8,12 +8,12 @@
 #include <thread>
 #include "config.h"
 
-#include <aquaman/concurrent/channel_future.h>
-#include <aquaman/concurrent/event_executor.h>
-#include <aquaman/event/result.h>
-#include <aquaman/event/generic_event.h>
-#include <aquaman/schedule/default_scheduler.h>
- 
+#include "aquaman/concurrent/channel_future.h"
+#include "aquaman/concurrent/event_executor.h"
+#include "aquaman/event/result.h"
+#include "aquaman/event/generic_event.h"
+#include "aquaman/schedule/default_scheduler.h"
+
 #include <xlog/xlog.h>
 
 using namespace aquaman;

@@ -6,10 +6,10 @@
 #include <mutex>
 #include <thread>
 
-#include <aquaman/concurrent/channel_future.h>
-#include <aquaman/concurrent/generic_future_listener.h>
-#include <aquaman/concurrent/promise.h>
-#include <aquaman/event/result.h>
+#include "aquaman/concurrent/channel_future.h"
+#include "aquaman/concurrent/generic_future_listener.h"
+#include "aquaman/concurrent/promise.h"
+#include "aquaman/event/result.h"
 namespace aquaman
 {
 

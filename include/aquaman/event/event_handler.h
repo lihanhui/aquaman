@@ -2,8 +2,8 @@
 #ifndef AQUAMAN_EVENT_EVENT_HANDLER
 #define AQUAMAN_EVENT_EVENT_HANDLER
 
-#include <aquaman/concurrent/promise.h>
-#include <aquaman/concurrent/future.h>
+#include "aquaman/concurrent/promise.h"
+#include "aquaman/concurrent/future.h"
 
 namespace aquaman
 {

@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include <aquaman/event/event.h>
+#include "aquaman/event/event.h"
 
 namespace aquaman
 {

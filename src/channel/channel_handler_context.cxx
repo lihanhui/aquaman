@@ -1,6 +1,6 @@
 #include <xlog/xlog.h>
 
-#include <aquaman/channel/channel_handler_context.h>
+#include "aquaman/channel/channel_handler_context.h"
 
 using namespace aquaman;
 xlog::logger event_wrapper::logger = xlog::logger("event_wrapper");
