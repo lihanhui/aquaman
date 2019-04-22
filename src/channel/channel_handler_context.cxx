@@ -11,6 +11,7 @@ event_wrapper::event_wrapper(std::shared_ptr<channel_handler_context> context, s
 }
 void event_wrapper::run() {
     try {
+        XLOG(logger, xlog::log_level::DEBUG, "event_wrapper::run");
         invoke(this->context, this->ev);
     } catch(...){
     	;
