@@ -9,7 +9,7 @@ template <typename V> class result {
 private:
     int code;
     std::string err_msg;
-	V value;
+	std::shared_ptr<V> value;
 
 private:
     result(){
@@ -20,8 +20,9 @@ public:
 	/*result(result && v): code(v.code), err_msg(v.err_msg), value(v.value) {
         
     }//*/
-    result(V value){ 
-    	this->code = 0;
+    result(std::shared_ptr<V> value)
+    {
+        this->code = 0;
     	this->err_msg = "";
     	this->value = value;
     }
@@ -30,17 +31,20 @@ public:
         this->code = code;
     	this->err_msg = err_msg;
     }
-    
-    int get_code(){
-    	return code;
-    } 
-    
-    std::string & get_err_msg(){
-    	return err_msg;
+
+    const int get_code() const
+    {
+        return code;
     }
-    
-    V & get_value(){
-    	return value;
+
+    const std::string &get_err_msg() const
+    {
+        return err_msg;
+    }
+
+    const std::shared_ptr<V> get_value() const
+    {
+        return value;
     }
 };
 

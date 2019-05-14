@@ -64,7 +64,7 @@ public:
     
     //////////////////////
     bool done() override { return this->get_done(); }
-    bool success(T v) override{
+    bool success(const T v) override{
         std::lock_guard<std::mutex> guard(locker);
         if(this->get_done()) return false;
          
@@ -76,7 +76,7 @@ public:
     	}
         return true;
     }
-    bool try_success(T v) override{
+    bool try_success(const T v) override{
     	std::lock_guard<std::mutex> guard(locker);
     	if(this->get_done()) return false;
     	
