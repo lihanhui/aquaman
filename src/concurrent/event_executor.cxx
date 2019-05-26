@@ -17,10 +17,10 @@ xlog::logger event_executor::logger = xlog::logger("event_executor");
 
 void event_executor::run(){
 	while(true){
-	    XLOG(event_executor::logger, xlog::log_level::DEBUG, "{}", "try to dequeue event");
+	    //XLOG(event_executor::logger, xlog::log_level::DEBUG, "{}", "try to dequeue event");
 	    std::lock_guard<std::mutex> guard(locker);
 	    if(tasks.empty()){
-	    	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	    	//std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	    	continue;
 	    }
 	    XLOG(event_executor::logger, xlog::log_level::DEBUG, "{}", "try to process one event");

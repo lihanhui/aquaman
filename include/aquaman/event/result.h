@@ -27,7 +27,7 @@ public:
     	this->value = value;
     }
     
-    result(int code, std::string & err_msg){
+    result(int code, const std::string & err_msg){
         this->code = code;
     	this->err_msg = err_msg;
     }
