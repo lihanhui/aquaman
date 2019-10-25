@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.0)
 set (CXX_STANDARD "c++17")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=${CXX_STANDARD}")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=${CXX_STANDARD}")
 
 project (aquaman)
 
@@ -18,9 +18,17 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(uv REQUIRED libuv)
 message ("${uv_INCLUDE_DIRS} ${uv_LIBRARIES} ${uv_LINK_LIBRARIES}")
 
+find_library(FMT_LIBRARY fmt HINTS /usr/local/lib)
+set(EXTRA_LIBS ${EXTRA_LIBS} ${FMT_LIBRARY}) 
+message("fmt-libraries - ${FMT_LIBRARY}")
+
+find_library(XLOG_LIBRARY xlog HINTS /usr/local/lib)
+set(EXTRA_LIBS ${EXTRA_LIBS} ${XLOG_LIBRARY})
+message("xlog-libraries - ${XLOG_LIBRARY}")
+
 find_package(xlog 0.9 REQUIRED)
 if(xlog_FOUND)
-    message("found - ${xlog_INCLUDE_DIRS} - ${xlog_LIBRARIES}")
+	message("found - ${xlog_INCLUDE_DIRS} - ${xlog_LIBRARIES} - ${XLOG_LIBRARY}")
 endif()
 include_directories("${xlog_INCLUDE_DIRS}")
 
@@ -29,13 +37,11 @@ add_subdirectory(src/channel)
 add_subdirectory(src/concurrent)
 add_subdirectory(src/schedule)
 
-find_library(XLOG_LIBRARY xlog HINTS /usr/local/lib)
-#set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule ${XLOG_LIBRARY})
-set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule ${xlog_LIBRARIES})
+set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule ${xlog_LIBRARY})
 
 add_executable(aquaman-test src/main.cxx)
 target_compile_options(aquaman-test PUBLIC ${uv_CFLAGS_OTHER})
-target_link_libraries(aquaman-test  ${EXTRA_LIBS} ${uv_LINK_LIBRARIES})
+target_link_libraries(aquaman-test  ${EXTRA_LIBS} ${uv_LINK_LIBRARIES} pthread)
 
 add_library(aquaman SHARED src/main.cxx)
 target_link_libraries(aquaman  ${EXTRA_LIBS})
