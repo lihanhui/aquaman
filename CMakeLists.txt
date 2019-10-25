@@ -39,6 +39,20 @@ add_subdirectory(src/schedule)
 
 set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule ${xlog_LIBRARY})
 
+IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
+    MESSAGE(STATUS "current platform: Linux ")
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
+    MESSAGE(STATUS "current platform: Windows")
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+    MESSAGE(STATUS "current platform: FreeBSD")
+ELSEIF (CMAKE_SYSTEM_NAME MATCHES "APPLE")
+    MESSAGE(STATUS "current platform: APPLE")
+ELSE ()
+    MESSAGE(STATUS "other platform: ${CMAKE_SYSTEM_NAME}")
+ENDIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
+
+message("current platform ${CMAKE_SYSTEM_NAME}" )
+
 add_executable(aquaman-test src/main.cxx)
 target_compile_options(aquaman-test PUBLIC ${uv_CFLAGS_OTHER})
 target_link_libraries(aquaman-test  ${EXTRA_LIBS} ${uv_LINK_LIBRARIES} pthread)
