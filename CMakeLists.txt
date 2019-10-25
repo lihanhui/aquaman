@@ -2,10 +2,10 @@ cmake_minimum_required (VERSION 3.0)
 set (CXX_STANDARD "c++17")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=${CXX_STANDARD}")
 
-project (aquaman)
+project (aquaman VERSION 1.0.0)
 
-set (aquaman_VERSION_MAJOR 1)
-set (aquaman_VERSION_MINOR 0)
+#set (aquaman_VERSION_MAJOR 1)
+#set (aquaman_VERSION_MINOR 0)
 
 configure_file (
   "${PROJECT_SOURCE_DIR}/config.h.in"
