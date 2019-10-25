@@ -32,13 +32,6 @@ if(xlog_FOUND)
 endif()
 include_directories("${xlog_INCLUDE_DIRS}")
 
-add_subdirectory(src/event)
-add_subdirectory(src/channel)
-add_subdirectory(src/concurrent)
-add_subdirectory(src/schedule)
-
-set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule ${xlog_LIBRARY})
-
 IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
     MESSAGE(STATUS "current platform: Linux ")
     set(EXTRA_LIBS ${EXTRA_LIBS} pthread)
@@ -54,12 +47,18 @@ ENDIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
 
 message("current platform ${CMAKE_SYSTEM_NAME}" )
 
+add_library(aquaman SHARED src/concurrent/event_executor.cxx
+	        src/event/event.cxx
+	        src/schedule/scheduler.cxx
+	        src/channel/default_channel_pipeline.cxx
+	        src/channel/channel_handler_context.cxx
+	        src/math/math.cxx)
+target_link_libraries(aquaman  ${EXTRA_LIBS})
+
+
 add_executable(aquaman-test src/main.cxx)
 target_compile_options(aquaman-test PUBLIC ${uv_CFLAGS_OTHER})
-target_link_libraries(aquaman-test  ${EXTRA_LIBS} ${uv_LINK_LIBRARIES} )
-
-add_library(aquaman SHARED src/main.cxx)
-target_link_libraries(aquaman  ${EXTRA_LIBS})
+target_link_libraries(aquaman-test  ${EXTRA_LIBS} ${uv_LINK_LIBRARIES} aquaman )
 
 # add the install targets
 install (TARGETS aquaman DESTINATION lib
