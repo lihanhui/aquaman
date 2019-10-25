@@ -11,14 +11,14 @@ xlog::logger default_channel_pipeline::logger = xlog::logger("default_channel_pi
 
 void default_channel_pipeline::add_first(std::string name, std::shared_ptr<channel_handler_context> ctx) {
     //std::shared_ptr<channel_handler_context> ctx ;//= std::make_shared<default_channel_handler_context>(pipeline, handler);
-    XLOG(logger, xlog::log_level::DEBUG, "add_first") ;
+    //XLOG(logger, xlog::log_level::DEBUG, "add_first") ;
     std::shared_ptr<channel_handler_context> next = this->head->get_next();
     ctx->set_next(next);
     ctx->set_prev(this->head);
         
 	this->head->set_next(ctx);
 	next->set_prev(ctx);
-	XLOG(logger, xlog::log_level::DEBUG, "add_first ...after") ;	
+	//XLOG(logger, xlog::log_level::DEBUG, "add_first ...after") ;	
 }
 void default_channel_pipeline::add_last (std::string name, std::shared_ptr<channel_handler_context> ctx) {
     //std::shared_ptr<channel_handler_context> ctx ;//= std::make_shared<default_channel_handler_context>(pipeline, handler);
@@ -33,12 +33,12 @@ void default_channel_pipeline::add_last (std::string name, std::shared_ptr<chann
 
 void default_channel_pipeline::init_channel_handler_context(std::shared_ptr<channel_handler_context> head,
     						std::shared_ptr<channel_handler_context> tail){
-    XLOG(logger, xlog::log_level::DEBUG, "init_channel_handler_context") ;
+    //XLOG(logger, xlog::log_level::DEBUG, "init_channel_handler_context") ;
 	this->head = head;
 	this->tail = tail;
 	head->set_next(this->tail);
 	head->set_prev(this->tail);
 	tail->set_next(this->head);
 	tail->set_prev(this->head);
-	XLOG(logger, xlog::log_level::DEBUG, "init_channel_handler_context ...") ;
+	//XLOG(logger, xlog::log_level::DEBUG, "init_channel_handler_context ...") ;
 }

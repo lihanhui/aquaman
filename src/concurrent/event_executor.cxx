@@ -23,12 +23,12 @@ void event_executor::run(){
 	    	//std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	    	continue;
 	    }
-	    XLOG(event_executor::logger, xlog::log_level::DEBUG, "{}", "try to process one event");
+	    //XLOG(event_executor::logger, xlog::log_level::DEBUG, "{}", "try to process one event");
 	    std::shared_ptr<runnable> task = tasks.front();
 	    tasks.pop();
 		try{
 		    task->run();
-		    XLOG(event_executor::logger, xlog::log_level::DEBUG, "user count {}", task.use_count());
+		    //XLOG(event_executor::logger, xlog::log_level::DEBUG, "user count {}", task.use_count());
 		}catch(...){
 			;
 		}

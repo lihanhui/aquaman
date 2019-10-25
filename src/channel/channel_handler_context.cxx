@@ -11,7 +11,7 @@ event_wrapper::event_wrapper(std::shared_ptr<channel_handler_context> context, s
 }
 void event_wrapper::run() {
     try {
-        XLOG(logger, xlog::log_level::DEBUG, "event_wrapper::run");
+        //XLOG(logger, xlog::log_level::DEBUG, "event_wrapper::run");
         invoke(this->context, this->ev);
     } catch(...){
     	;
@@ -23,13 +23,13 @@ void event_wrapper::invoke(std::shared_ptr<channel_handler_context> context, std
 
 xlog::logger channel_handler_context::logger = xlog::logger("channel_handler_context");      
 void channel_handler_context::invoke0(std::shared_ptr<event> & ev){
-    XLOG(logger, xlog::log_level::DEBUG, "invoke0") ;
+    //XLOG(logger, xlog::log_level::DEBUG, "invoke0") ;
     std::shared_ptr<channel_handler_context> next = get_next();
     if(next == nullptr){
-        XLOG(logger, xlog::log_level::DEBUG, "null next") ;
+        //XLOG(logger, xlog::log_level::DEBUG, "null next") ;
         return;
     }
-    XLOG(logger, xlog::log_level::DEBUG, "executor") ;
+    //XLOG(logger, xlog::log_level::DEBUG, "executor") ;
     std::shared_ptr<event_executor> executor = next->get_event_executor();
     if (executor->in_eventloop()) {
         next->invoke(ev);
@@ -75,7 +75,7 @@ void channel_handler_context::invoke(std::shared_ptr<event> ev) {
     if( ev->aborted() ){
         return ;
     }
-    XLOG(logger, xlog::log_level::DEBUG, "invoke") ;
+    //XLOG(logger, xlog::log_level::DEBUG, "invoke") ;
     std::shared_ptr<channel_handler> handler = get_channel_handler();
     if(handler != nullptr){
     	handler->invoke(this->shared_from_this(), ev);
