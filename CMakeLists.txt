@@ -41,6 +41,7 @@ set(EXTRA_LIBS ${EXTRA_LIBS} event channel concurrent schedule ${xlog_LIBRARY})
 
 IF (CMAKE_SYSTEM_NAME MATCHES "Linux")
     MESSAGE(STATUS "current platform: Linux ")
+    set(EXTRA_LIBS ${EXTRA_LIBS} pthread)
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "Windows")
     MESSAGE(STATUS "current platform: Windows")
 ELSEIF (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
@@ -55,7 +56,7 @@ message("current platform ${CMAKE_SYSTEM_NAME}" )
 
 add_executable(aquaman-test src/main.cxx)
 target_compile_options(aquaman-test PUBLIC ${uv_CFLAGS_OTHER})
-target_link_libraries(aquaman-test  ${EXTRA_LIBS} ${uv_LINK_LIBRARIES} pthread)
+target_link_libraries(aquaman-test  ${EXTRA_LIBS} ${uv_LINK_LIBRARIES} )
 
 add_library(aquaman SHARED src/main.cxx)
 target_link_libraries(aquaman  ${EXTRA_LIBS})
