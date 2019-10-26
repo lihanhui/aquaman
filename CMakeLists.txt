@@ -47,13 +47,13 @@ ENDIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
 
 message("current platform ${CMAKE_SYSTEM_NAME}" )
 
-set_target_properties(aquaman PROPERTIES VERSION 1.0 SOVERION 1)
 add_library(aquaman SHARED src/concurrent/event_executor.cxx
 	        src/event/event.cxx
 	        src/schedule/scheduler.cxx
 	        src/channel/default_channel_pipeline.cxx
 	        src/channel/channel_handler_context.cxx
 	        src/math/math.cxx)
+set_target_properties(aquaman PROPERTIES VERSION 1.0 SOVERION 1)
 target_link_libraries(aquaman  ${EXTRA_LIBS})
 
 
