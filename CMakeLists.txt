@@ -47,6 +47,7 @@ ENDIF (CMAKE_SYSTEM_NAME MATCHES "Linux")
 
 message("current platform ${CMAKE_SYSTEM_NAME}" )
 
+set_target_properties(aquaman PROPERTIES VERSION 1.0 SOVERION 1)
 add_library(aquaman SHARED src/concurrent/event_executor.cxx
 	        src/event/event.cxx
 	        src/schedule/scheduler.cxx
