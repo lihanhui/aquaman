@@ -5,14 +5,14 @@
 namespace aquaman
 {
 
-template <typename V> class result {
+template <typename V> class Result {
 private:
     int code;
     std::string err_msg;
 	std::shared_ptr<V> value;
 
 private:
-    result(){
+    Result(){
     	this->code = 0;
     	this->err_msg = "";
     }
@@ -20,14 +20,14 @@ public:
 	/*result(result && v): code(v.code), err_msg(v.err_msg), value(v.value) {
         
     }//*/
-    result(std::shared_ptr<V> value)
+    Result(std::shared_ptr<V> value)
     {
         this->code = 0;
     	this->err_msg = "";
     	this->value = value;
     }
     
-    result(int code, const std::string & err_msg){
+    Result(int code, const std::string & err_msg){
         this->code = code;
     	this->err_msg = err_msg;
     }

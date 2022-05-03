@@ -5,7 +5,7 @@
 namespace aquaman
 {
 
-template<typename T> class default_channel_promise: public channel_promise<T> {
+template<typename T> class DefaultChannelPromise: public ChannelPromise<T> {
 
 };
 

@@ -20,41 +20,41 @@ using namespace aquaman;
 struct myclass {
   void operator()() {;}
 };
-class my_event: public generic_event<int>{
+class MyEvent: public GenericEvent<int>{
 private:
     static xlog::logger logger;
 public:
-    my_event():generic_event(){
+    MyEvent():GenericEvent(){
     }
     void handle_event() override{
-        XLOG(logger, xlog::log_level::DEBUG, "{}", "my_event");
+        XLOG(logger, xlog::log_level::DEBUG, "{}", "MyEvent");
         get_promise()->success(1);
     }
-    virtual ~my_event(){
+    virtual ~MyEvent(){
         XLOG(logger, xlog::log_level::DEBUG, "{}", "my event destroied");
     }
 };
-xlog::logger my_event::logger = xlog::logger("my_event");
+xlog::logger MyEvent::logger = xlog::logger("MyEvent");
 
 int main (int argc, char *argv[]){
     xlog::logger logger = xlog::logger("main");
     XLOG(logger, xlog::log_level::DEBUG, "{}", "this is main func of xlog test");
     
-    std::function<void(const std::shared_ptr<future<int>> &future)> mylambda 
-        = [&](const std::shared_ptr<future<int>> &future)->void { XLOG(logger, xlog::log_level::DEBUG, "{}", "==============xxxxxxxxx"); };
+    std::function<void(const std::shared_ptr<Future<int>> &future)> mylambda 
+        = [&](const std::shared_ptr<Future<int>> &future)->void { XLOG(logger, xlog::log_level::DEBUG, "{}", "==============xxxxxxxxx"); };
     
-    XLOG(logger, xlog::log_level::DEBUG, "function {}", sizeof(std::shared_ptr<my_event>));
-    std::shared_ptr<my_event> event = std::make_shared<my_event>();
+    XLOG(logger, xlog::log_level::DEBUG, "function {}", sizeof(std::shared_ptr<MyEvent>));
+    std::shared_ptr<MyEvent> event = std::make_shared<MyEvent>();
     XLOG(logger, xlog::log_level::DEBUG, "typeid(event).name() = {}", typeid(event).name());
-    std::shared_ptr<future<int>> future = event->get_future();
-    future->add_listener(std::make_shared<generic_future_listener<int>>(mylambda));
+    std::shared_ptr<Future<int>> future = event->get_future();
+    future->add_listener(std::make_shared<GenericFutureListener<int>>(mylambda));
     
     XLOG(logger, xlog::log_level::DEBUG, "{}", "scheduler");
-    std::shared_ptr<scheduler> sched = std::make_shared<default_scheduler>(1,2);
+    std::shared_ptr<Scheduler> sched = std::make_shared<DefaultScheduler>(1,2);
     XLOG(logger, xlog::log_level::DEBUG, "{}", "submit_event");
     sched->submit_event(std::string("event"), event);
-    event = std::make_shared<my_event>();
-    //std::shared_ptr<event_executor> executor = std::make_shared<event_executor>();
+    event = std::make_shared<MyEvent>();
+    //std::shared_ptr<EventExecutor> executor = std::make_shared<EventExecutor>();
     //executor->insert_event_handler(event);
     //executor->start();
     while(true){

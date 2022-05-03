@@ -13,14 +13,14 @@
 namespace aquaman
 {
 
-template <typename T> class channel_promise: public channel_future<T>, public promise<T> {
+template <typename T> class ChannelPromise: public ChannelFuture<T>, public Promise<T> {
 private:
     std::mutex locker;
     std::atomic_bool done_;
     std::atomic_bool succeeded;
     std::exception_ptr ex;
     
-    std::list<std::shared_ptr<generic_future_listener<T>>> listeners;
+    std::list<std::shared_ptr<GenericFutureListener<T>>> listeners;
     
 private:
     std::mutex& get_locker(){
@@ -33,16 +33,16 @@ private:
     void set_done(){
     	return done_.store(true);
     }
-    std::list<std::shared_ptr<generic_future_listener<T>>> & get_listeners(){
+    std::list<std::shared_ptr<GenericFutureListener<T>>> & get_listeners(){
     	return listeners;
     }    
 public:
-    channel_promise(){
+    ChannelPromise(){
     	done_     = false;
     	succeeded = false;
     	ex        = nullptr;
     }
-    virtual ~channel_promise(){
+    virtual ~ChannelPromise(){
     }
     
     ///////////////////////
@@ -50,7 +50,7 @@ public:
     bool success() override { return succeeded; }
     std::exception_ptr cause() override { return ex; }
     
-    void add_listener(std::shared_ptr<generic_future_listener<T>> listener) override {
+    void add_listener(std::shared_ptr<GenericFutureListener<T>> listener) override {
         std::lock_guard<std::mutex> guard(locker);
         if(get_done()){
         	listener->operationComplete(this->shared_from_this());
@@ -71,7 +71,7 @@ public:
         this->set_value(v);
         this->done_ = true;
         this->succeeded = true;
-    	for(std::shared_ptr<generic_future_listener<T>> &listener: listeners){
+    	for(std::shared_ptr<GenericFutureListener<T>> &listener: listeners){
     		listener->operationComplete(this->shared_from_this());
     	}
         return true;
@@ -84,7 +84,7 @@ public:
     	this->done_ = true;
     	this->succeeded = true;
     	
-    	for(std::shared_ptr<generic_future_listener<T>> &listener: listeners){
+    	for(std::shared_ptr<GenericFutureListener<T>> &listener: listeners){
     		listener->operationComplete(this->shared_from_this());
     	}
         return true;
@@ -99,7 +99,7 @@ public:
     	this->set_exception(cause);
     	this->ex = cause;
     	
-    	for(std::shared_ptr<generic_future_listener<T>> &listener: listeners){
+    	for(std::shared_ptr<GenericFutureListener<T>> &listener: listeners){
     		listener->operationComplete(this->shared_from_this());
     	}
         return true;
@@ -114,7 +114,7 @@ public:
     	this->set_exception(cause);
     	this->ex = cause;
     	
-    	for(std::shared_ptr<generic_future_listener<T>> &listener: listeners){
+    	for(std::shared_ptr<GenericFutureListener<T>> &listener: listeners){
     		listener->operationComplete(this->shared_from_this());
     	}
         return true;

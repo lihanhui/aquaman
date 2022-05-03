@@ -12,18 +12,18 @@
 namespace aquaman
 {
 
-class event_executor {
+class EventExecutor {
 private:
     static xlog::logger logger;
 private:
     std::mutex locker; 
-    std::queue<std::shared_ptr<runnable>> tasks;
+    std::queue<std::shared_ptr<Runnable>> tasks;
     std::thread::id this_id;
     std::thread thrd;
     
 public:
     
-    void insert_task(std::shared_ptr<runnable> task) {
+    void insert_task(std::shared_ptr<Runnable> task) {
         std::lock_guard<std::mutex> guard(locker);
         tasks.push(task);
     }
@@ -32,7 +32,7 @@ public:
     }
     void run();
     void start(){
-        std::packaged_task<void(event_executor *)> task(&event_executor::run0);
+        std::packaged_task<void(EventExecutor *)> task(&EventExecutor::run0);
     	std::future<void> result = task.get_future();
  
     	thrd = std::thread (std::move(task), this);

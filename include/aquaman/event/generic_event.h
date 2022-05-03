@@ -10,14 +10,14 @@
 namespace aquaman
 {
 
-template <typename V> class generic_event: public event_handler<V>, public event {
+template <typename V> class GenericEvent: public EventHandler<V>, public Event {
 private:
-    std::shared_ptr<channel_promise<V>> promise_;
+    std::shared_ptr<ChannelPromise<V>> promise_;
 public: 
-    generic_event(){
-    	promise_ = std::make_shared<channel_promise<V>>();
+    GenericEvent(){
+    	promise_ = std::make_shared<ChannelPromise<V>>();
     }
-    std::shared_ptr<future<V>> get_future() override {
+    std::shared_ptr<Future<V>> get_future() override {
     	return promise_;
     }
     
@@ -29,7 +29,7 @@ public:
     	return promise_->done();
     }
 protected:
-    std::shared_ptr<promise<V>> get_promise() {
+    std::shared_ptr<Promise<V>> get_promise() {
     	return promise_;
     }
 };

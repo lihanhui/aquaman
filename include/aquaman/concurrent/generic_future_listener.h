@@ -9,13 +9,13 @@
 namespace aquaman
 {
 
-template<class T> class future;
+template<class T> class Future;
 
-template <typename T, typename F = future<T>> class generic_future_listener: public event_listener{
+template <typename T, typename F = Future<T>> class GenericFutureListener: public EventListener{
 private:
 	std::function<void(const std::shared_ptr<F> future)> callable;
 public:
-    generic_future_listener(std::function<void(const std::shared_ptr<F> future)> callable){
+    GenericFutureListener(std::function<void(const std::shared_ptr<F> future)> callable){
         this->callable = callable;
     }
     void operationComplete(const std::shared_ptr<F> future){
@@ -24,5 +24,5 @@ public:
 };
 
 }; // namespace aquaman
-//typedef generic_future_listener<typename T> future_listener<typename T>;
+//typedef GenericFutureListener<typename T> FutureListener<typename T>;
 #endif

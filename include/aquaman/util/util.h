@@ -6,7 +6,7 @@
 namespace aquaman
 {
 
-struct util {
+struct Util {
 	static size_t hash(const std::string & key) {
 		std::hash<std::string> hash_fn;
     	return hash_fn(key);

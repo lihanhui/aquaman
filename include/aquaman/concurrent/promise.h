@@ -5,7 +5,7 @@
 namespace aquaman
 {
 
-template <typename T> class promise: public std::promise<T>{
+template <typename T> class Promise: public std::promise<T>{
 public:
      /**
      * Marks this future as a success and notifies all

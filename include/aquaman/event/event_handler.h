@@ -8,12 +8,12 @@
 namespace aquaman
 {
 
-template <typename V> class event_handler {
+template <typename V> class EventHandler {
 public: 
-    virtual std::shared_ptr<future<V>>  get_future() = 0;
+    virtual std::shared_ptr<Future<V>>  get_future() = 0;
 
 //protected:
-//    virtual std::shared_ptr<promise<V>>  get_promise() = 0;
+//    virtual std::shared_ptr<Promise<V>>  get_promise() = 0;
 };
 
 };

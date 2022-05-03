@@ -11,31 +11,31 @@
 namespace aquaman
 {
 
-class default_channel_pipeline : public channel_pipeline{
+class DefaultChannelPipeline : public ChannelPipeline{
 private:
     static xlog::logger logger;
 private:
-    std::weak_ptr<channel> chan;
-    std::shared_ptr<channel_handler_context> tail;
-    std::shared_ptr<channel_handler_context> head;
+    std::weak_ptr<Channel> chan;
+    std::shared_ptr<ChannelHandlerContext> tail;
+    std::shared_ptr<ChannelHandlerContext> head;
 public:
-    default_channel_pipeline(std::shared_ptr<channel> chan,
-    						std::shared_ptr<channel_handler_context> tail,
-    						std::shared_ptr<channel_handler_context> head	){
+    DefaultChannelPipeline(std::shared_ptr<Channel> chan,
+    						std::shared_ptr<ChannelHandlerContext> tail,
+    						std::shared_ptr<ChannelHandlerContext> head	){
     	this->chan = chan;
     	this->tail = tail;
     	this->head = head;
     }
-	void invoke(std::shared_ptr<event> event) override{
+	void invoke(std::shared_ptr<Event> event) override{
 		head->invoke(event);
 	}
-	std::shared_ptr<channel> get_channel() override {
+	std::shared_ptr<Channel> get_channel() override {
 		return chan.lock();
 	}
-	void init_channel_handler_context(std::shared_ptr<channel_handler_context> head,
-    						std::shared_ptr<channel_handler_context> tail) override;
-    void add_first(std::string name, std::shared_ptr<channel_handler_context> ctx) override;
-    void add_last (std::string name, std::shared_ptr<channel_handler_context> ctx) override;
+	void init_channel_handler_context(std::shared_ptr<ChannelHandlerContext> head,
+    						std::shared_ptr<ChannelHandlerContext> tail) override;
+    void add_first(std::string name, std::shared_ptr<ChannelHandlerContext> ctx) override;
+    void add_last (std::string name, std::shared_ptr<ChannelHandlerContext> ctx) override;
 };
 
 }; // namespace aquaman

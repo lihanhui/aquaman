@@ -14,68 +14,68 @@
 
 namespace aquaman
 {
-struct channel_pipeline;
-struct channel_handler;         
-struct channel;
-struct channel_handler_context;
+struct ChannelPipeline;
+struct ChannelHandler;         
+struct Channel;
+struct ChannelHandlerContext;
 
-class event_wrapper: public runnable{
+class EventWrapper: public Runnable{
 private:
     static xlog::logger logger;
 	private:
-	    std::shared_ptr<event> ev;
-	    std::shared_ptr<channel_handler_context> context;
+	    std::shared_ptr<Event> ev;
+	    std::shared_ptr<ChannelHandlerContext> context;
 	public:
-	    event_wrapper(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev );
+	    EventWrapper(std::shared_ptr<ChannelHandlerContext> context, std::shared_ptr<Event> ev );
 	    void run() override ;
 	protected:
-	    void invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev);
+	    void invoke(std::shared_ptr<ChannelHandlerContext> context, std::shared_ptr<Event> ev);
     public:
-	    virtual ~event_wrapper(){
+	    virtual ~EventWrapper(){
 		    //XLOG(logger, xlog::log_level::DEBUG, "event_wrapper destroied");
 	    }
 };
     
-struct channel_handler_context: public channel_invoker, public std::enable_shared_from_this<channel_handler_context> {
+struct ChannelHandlerContext: public ChannelInvoker, public std::enable_shared_from_this<ChannelHandlerContext> {
 private:
     static xlog::logger logger;
 private:
-    std::weak_ptr<channel_pipeline> pipeline;
-    std::weak_ptr<channel_handler_context> prev;
-    std::shared_ptr<channel_handler_context> next;
+    std::weak_ptr<ChannelPipeline> pipeline;
+    std::weak_ptr<ChannelHandlerContext> prev;
+    std::shared_ptr<ChannelHandlerContext> next;
 
 private: 
-    void invoke0(std::shared_ptr<event> & ev);	
+    void invoke0(std::shared_ptr<Event> & ev);	
 public:
-    channel_handler_context(std::shared_ptr<channel_pipeline> pipeline);
-    std::shared_ptr<channel_handler_context> get_prev();
-    std::shared_ptr<channel_handler_context> get_next();
+    ChannelHandlerContext(std::shared_ptr<ChannelPipeline> pipeline);
+    std::shared_ptr<ChannelHandlerContext> get_prev();
+    std::shared_ptr<ChannelHandlerContext> get_next();
     
-    void set_prev(std::shared_ptr<channel_handler_context> prev);
-    void set_next(std::shared_ptr<channel_handler_context> next);
+    void set_prev(std::shared_ptr<ChannelHandlerContext> prev);
+    void set_next(std::shared_ptr<ChannelHandlerContext> next);
     
-    virtual std::shared_ptr<channel> get_channel();
-    virtual std::shared_ptr<event_executor> get_event_executor() ;
-    virtual std::shared_ptr<channel_pipeline> get_pipeline();
-    void invoke(std::shared_ptr<event> ev) override;
+    virtual std::shared_ptr<Channel> get_channel();
+    virtual std::shared_ptr<EventExecutor> get_event_executor() ;
+    virtual std::shared_ptr<ChannelPipeline> get_pipeline();
+    void invoke(std::shared_ptr<Event> ev) override;
     
-    virtual std::shared_ptr<channel_handler> get_channel_handler() = 0;
+    virtual std::shared_ptr<ChannelHandler> get_channel_handler() = 0;
 
 
 };
 
-class head_context: public channel_handler_context{
+class HeadContext: public ChannelHandlerContext{
 public:
-    head_context(std::shared_ptr<channel_pipeline> pipeline):channel_handler_context(pipeline){
+    HeadContext(std::shared_ptr<ChannelPipeline> pipeline):ChannelHandlerContext(pipeline){
     }     
-    std::shared_ptr<channel_handler> get_channel_handler() override;   
+    std::shared_ptr<ChannelHandler> get_channel_handler() override;   
 };
 
-class tail_context: public channel_handler_context{
+class TailContext: public ChannelHandlerContext{
 public:
-    tail_context(std::shared_ptr<channel_pipeline> pipeline):channel_handler_context(pipeline){
+    TailContext(std::shared_ptr<ChannelPipeline> pipeline):ChannelHandlerContext(pipeline){
     } 
-    std::shared_ptr<channel_handler> get_channel_handler() override;       
+    std::shared_ptr<ChannelHandler> get_channel_handler() override;       
 };
 
 }; // namespace aquaman

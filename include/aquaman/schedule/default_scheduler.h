@@ -9,21 +9,21 @@
 namespace aquaman
 {
 
-struct default_scheduler: public abstract_scheduler {
+struct DefaultScheduler: public AbstractScheduler {
 private:
     static xlog::logger logger;
 public:
-    default_scheduler(): abstract_scheduler(8, 32){
+    DefaultScheduler(): AbstractScheduler(8, 32){
     }
-    default_scheduler(int thread_count, int max_channel_count): abstract_scheduler(thread_count, max_channel_count) {
+    DefaultScheduler(int thread_count, int max_channel_count): AbstractScheduler(thread_count, max_channel_count) {
 	}
-    void submit_event(const std::string &key, std::shared_ptr<event> ev) override
+    void submit_event(const std::string &key, std::shared_ptr<Event> ev) override
     {
         //XLOG(logger, xlog::log_level::DEBUG, "submit_event");
-        int hash = util::hash(key);
+        int hash = Util::hash(key);
         //XLOG(logger, xlog::log_level::DEBUG, "hash");
         int index = hash % this->get_thread_count();
-        std::shared_ptr<channel> chan = this->get_channel(index);
+        std::shared_ptr<Channel> chan = this->get_channel(index);
         //XLOG(logger, xlog::log_level::DEBUG, "channel");
         chan->invoke(ev);
     }

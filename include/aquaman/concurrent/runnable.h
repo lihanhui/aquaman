@@ -3,7 +3,7 @@
 namespace aquaman
 {
 
-struct runnable{
+struct Runnable{
 	virtual void run() = 0;
 };
 

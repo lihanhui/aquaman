@@ -6,7 +6,7 @@
 namespace aquaman
 {
 
-template <typename T> class channel_future_listener: public generic_future_listener<T>{
+template <typename T> class ChannelFutureListener: public GenericFutureListener<T>{
 
 };
 

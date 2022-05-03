@@ -5,7 +5,7 @@
 namespace aquaman
 {
 
-class event {
+class Event {
 public: 
     virtual void handle_event() = 0;
     virtual bool failure(std::exception_ptr cause) = 0;

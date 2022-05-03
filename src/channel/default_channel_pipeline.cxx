@@ -7,12 +7,12 @@
 
 using namespace aquaman;
 
-xlog::logger default_channel_pipeline::logger = xlog::logger("default_channel_pipeline");
+xlog::logger DefaultChannelPipeline::logger = xlog::logger("DefaultChannelPipeline");
 
-void default_channel_pipeline::add_first(std::string name, std::shared_ptr<channel_handler_context> ctx) {
-    //std::shared_ptr<channel_handler_context> ctx ;//= std::make_shared<default_channel_handler_context>(pipeline, handler);
+void DefaultChannelPipeline::add_first(std::string name, std::shared_ptr<ChannelHandlerContext> ctx) {
+    //std::shared_ptr<ChannelHandlerContext> ctx ;//= std::make_shared<DefaultChannelHandlerContext>(pipeline, handler);
     //XLOG(logger, xlog::log_level::DEBUG, "add_first") ;
-    std::shared_ptr<channel_handler_context> next = this->head->get_next();
+    std::shared_ptr<ChannelHandlerContext> next = this->head->get_next();
     ctx->set_next(next);
     ctx->set_prev(this->head);
         
@@ -20,10 +20,10 @@ void default_channel_pipeline::add_first(std::string name, std::shared_ptr<chann
 	next->set_prev(ctx);
 	//XLOG(logger, xlog::log_level::DEBUG, "add_first ...after") ;	
 }
-void default_channel_pipeline::add_last (std::string name, std::shared_ptr<channel_handler_context> ctx) {
-    //std::shared_ptr<channel_handler_context> ctx ;//= std::make_shared<default_channel_handler_context>(pipeline, handler);
+void DefaultChannelPipeline::add_last (std::string name, std::shared_ptr<ChannelHandlerContext> ctx) {
+    //std::shared_ptr<ChannelHandlerContext> ctx ;//= std::make_shared<DefaultChannelHandlerContext>(pipeline, handler);
 
-    std::shared_ptr<channel_handler_context> prev = this->head->get_prev();
+    std::shared_ptr<ChannelHandlerContext> prev = this->head->get_prev();
     ctx->set_next(this->tail);
     ctx->set_prev(prev);
         
@@ -31,8 +31,8 @@ void default_channel_pipeline::add_last (std::string name, std::shared_ptr<chann
 	prev->set_next(ctx);
 }
 
-void default_channel_pipeline::init_channel_handler_context(std::shared_ptr<channel_handler_context> head,
-    						std::shared_ptr<channel_handler_context> tail){
+void DefaultChannelPipeline::init_channel_handler_context(std::shared_ptr<ChannelHandlerContext> head,
+    						std::shared_ptr<ChannelHandlerContext> tail){
     //XLOG(logger, xlog::log_level::DEBUG, "init_channel_handler_context") ;
 	this->head = head;
 	this->tail = tail;

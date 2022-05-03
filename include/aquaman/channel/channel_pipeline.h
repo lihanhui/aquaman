@@ -11,12 +11,12 @@
 namespace aquaman
 {
 
-struct channel;
-struct channel_pipeline : public channel_invoker{
-    virtual std::shared_ptr<channel> get_channel() = 0;
-    virtual void init_channel_handler_context(std::shared_ptr<channel_handler_context> head, std::shared_ptr<channel_handler_context> tail) = 0;
-    virtual void add_first(std::string name, std::shared_ptr<channel_handler_context> ctx) = 0;
-    virtual void add_last (std::string name, std::shared_ptr<channel_handler_context> ctx) = 0;
+struct Channel;
+struct ChannelPipeline : public ChannelInvoker{
+    virtual std::shared_ptr<Channel> get_channel() = 0;
+    virtual void init_channel_handler_context(std::shared_ptr<ChannelHandlerContext> head, std::shared_ptr<ChannelHandlerContext> tail) = 0;
+    virtual void add_first(std::string name, std::shared_ptr<ChannelHandlerContext> ctx) = 0;
+    virtual void add_last (std::string name, std::shared_ptr<ChannelHandlerContext> ctx) = 0;
 };
 
 }; // namespace aquaman

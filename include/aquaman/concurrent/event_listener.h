@@ -5,7 +5,7 @@
 namespace aquaman
 {
 
-class event_listener {
+class EventListener {
 
 };
 

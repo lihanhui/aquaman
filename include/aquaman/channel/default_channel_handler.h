@@ -9,10 +9,10 @@
 namespace aquaman
 {
 
-class default_channel_handler : public channel_handler{
+class DefaultChannelHandler : public ChannelHandler{
 public:
-    default_channel_handler(){}
-    void invoke(std::shared_ptr<channel_handler_context> context, std::shared_ptr<event> ev) override {
+    DefaultChannelHandler(){}
+    void invoke(std::shared_ptr<ChannelHandlerContext> context, std::shared_ptr<Event> ev) override {
 		  try{
         ev->handle_event();
       }catch(...){

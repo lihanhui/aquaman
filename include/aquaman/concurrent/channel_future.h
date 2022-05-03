@@ -7,7 +7,7 @@
 namespace aquaman
 {
 
-template <typename T> class channel_future: public future<T> {
+template <typename T> class ChannelFuture: public Future<T> {
 public:
     
 

@@ -8,8 +8,8 @@
 namespace aquaman
 {
 
-struct channel_invoker {
-    virtual void invoke(std::shared_ptr<event> ev) = 0;
+struct ChannelInvoker {
+    virtual void invoke(std::shared_ptr<Event> ev) = 0;
 };
 
 }; // namespace aquaman

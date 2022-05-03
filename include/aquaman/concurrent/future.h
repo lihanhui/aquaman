@@ -7,7 +7,7 @@
 namespace aquaman
 {
 
-template<class T> class future: public std::enable_shared_from_this<future<T>> {
+template<class T> class Future: public std::enable_shared_from_this<Future<T>> {
  public:
  /**
      * Returns {@code true} if and only if the I/O operation was completed
@@ -31,7 +31,7 @@ template<class T> class future: public std::enable_shared_from_this<future<T>> {
      * {@linkplain #isDone() done}.  If this future is already
      * completed, the specified listener is notified immediately.
      */
-    virtual void add_listener(std::shared_ptr<generic_future_listener<T>> listener) = 0;
+    virtual void add_listener(std::shared_ptr<GenericFutureListener<T>> listener) = 0;
 
     /**
      * Return the result without blocking. If the future is not done yet this will return {@code null}.

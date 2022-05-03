@@ -11,20 +11,20 @@
 namespace aquaman
 {
 
-class default_channel_handler_context : public channel_handler_context{
+class DefaultChannelHandlerContext : public ChannelHandlerContext{
 private:
-    std::shared_ptr<channel_handler> handler;
+    std::shared_ptr<ChannelHandler> handler;
 	
 public:
-    default_channel_handler_context(
-    		std::shared_ptr<channel_pipeline> pipeline,
-    		std::shared_ptr<channel_handler>  handler): channel_handler_context(pipeline){
+    DefaultChannelHandlerContext(
+    		std::shared_ptr<ChannelPipeline> pipeline,
+    		std::shared_ptr<ChannelHandler>  handler): ChannelHandlerContext(pipeline){
     	this->handler  = handler;
     	//this->set_next(nullptr);
     	//this->set_prev(nullptr);
     }
 
-    std::shared_ptr<channel_handler> get_channel_handler() override{
+    std::shared_ptr<ChannelHandler> get_channel_handler() override{
     	return handler;
     }
 };

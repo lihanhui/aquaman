@@ -7,8 +7,8 @@
 namespace aquaman
 {
 
-struct scheduler {
-    virtual void submit_event(const std::string & key, std::shared_ptr<event> ev) = 0;
+struct Scheduler {
+    virtual void submit_event(const std::string & key, std::shared_ptr<Event> ev) = 0;
 };
 
 }; // namespace aquaman
