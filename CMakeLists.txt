@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.0)
 set (CXX_STANDARD "c++17")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=${CXX_STANDARD}")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=${CXX_STANDARD} -g")
 
 project (aquaman VERSION 1.0.0)
 
